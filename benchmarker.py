@@ -67,7 +67,7 @@ def process_nethermind(output):
         'stateRoot': state_root
     }
 
-    return {'name': parsed_struct['name'], 'timeInMs': parsed_struct['timeInMs']}
+    return {'name': parsed_struct['name'], 'timeInMs': parsed_struct['timeInMs'], 'pass': parsed_struct['pass']}
 
 
 def process_reth(output):
@@ -209,20 +209,22 @@ def main():
     errors = ""
     # Print Computer specs
     partial_results = print_computer_specs()
-
+    worked = 0
+    didntwork = 0
     # Check if the provided input is a file ending in .json
     if os.path.isfile(tests_paths) and tests_paths.endswith('.json'):
         # Iterate over the runs
         for i in range(0, number_of_runs):
             run = run_command(client_name, tests_paths, repo_path)
             output = process_output(client_name, run)
-            if tests_paths not in results:
-                results[tests_paths] = [output['timeInMs']]
+            if output['pass']:
+                print(f"{tests_paths} worked")
+                worked += 1
             else:
-                results[tests_paths].append(output['timeInMs'])
+                print(f"{tests_paths} didn't work")
+                didntwork += 1
         if tests_paths in results:
-            partial_results += print_partial_results(client_name, tests_paths, results[tests_paths], output_folder,
-                                                     gen_charts)
+            pass
         else:
             errors += f"Error processing test case {tests_paths}\n"
     else:
@@ -236,24 +238,27 @@ def main():
                 try:
                     run = run_command(client_name, file_path, repo_path)
                     output = process_output(client_name, run)
-                    if file_name not in results:
-                        results[file_name] = [output['timeInMs']]
+                    if output['pass']:
+                        print(f"{file_name} worked")
+                        worked += 1
                     else:
-                        results[file_name].append(output['timeInMs'])
+                        print(f"{file_name} didn't work")
+                        didntwork += 1
                 except:
                     print(f"Error processing tests case {file_name}")
             if file_name in results:
-                partial_results += print_partial_results(client_name, file_name, results[file_name], output_folder,
-                                                         gen_charts)
+                pass
             else:
                 errors += f"Error processing test case {file_name}\n"
 
+    print(f"Worked: {worked}")
+    print(f"Didn't work: {didntwork}")
     # Create the output folder if it doesn't exist
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
+    # if not os.path.exists(output_folder):
+    #     os.makedirs(output_folder)
 
     # Print results after getting them.
-    print_final_results(client_name, results, output_folder, partial_results + '\n' + 'Tests with errors:' + errors)
+    # print_final_results(client_name, results, output_folder, partial_results + '\n' + 'Tests with errors:' + errors)
 
 
 if __name__ == '__main__':
