@@ -7,7 +7,7 @@
   -t "tests1/" \
   -w "warmup/warmup-1000bl-16wi-24tx.txt" \
   -c "nethermind,geth,reth,erigon,besu" \
-  -r 1 \
+  -r 8 \
   -o "results1"
 
 
@@ -15,14 +15,14 @@
   -t "tests1/" \
   -w "warmup/warmup-1000bl-16wi-24tx.txt" \
   -c "nethermind,geth,reth,erigon,besu" \
-  -r 1 \
+  -r 8 \
   -o "results2"
 
 ./run.sh \
   -t "tests1/" \
   -w "warmup/warmup-1000bl-16wi-24tx.txt" \
   -c "nethermind,geth,reth,erigon,besu" \
-  -r 1 \
+  -r 8 \
   -o "results3"
 
 
