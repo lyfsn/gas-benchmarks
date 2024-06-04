@@ -67,5 +67,4 @@ python3 report_html.py --resultsPath "$OUTPUT_DIR" --clients "$CLIENTS" --testsP
 
 
 # Zip the results folder
-ZIP_FILE="${OUTPUT_DIR}.zip"
-zip -r "$ZIP_FILE" "$OUTPUT_DIR"
+zip -r "${OUTPUT_DIR}.zip" "$OUTPUT_DIR"
