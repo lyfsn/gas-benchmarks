@@ -24,9 +24,9 @@ def get_table_report(client_results, clients, results_paths, test_cases, methods
         results_to_print += '\n'
 
     print(results_to_print)
-    if not os.path.exists('reports'):
-        os.mkdir('reports')
-    with open(f'reports/tables_norm.txt', 'w') as file:
+    if not os.path.exists(f'{results_paths}/reports'):
+        os.makedirs(f'{results_paths}/reports')
+    with open(f'{results_paths}/reports/tables_norm.txt', 'w') as file:
         file.write(results_to_print)
 
 
@@ -97,9 +97,6 @@ def main():
         for gas in test_case_gas:
             if gas not in gas_set:
                 gas_set.add(gas)
-
-    if not os.path.exists(f'{results_paths}/reports'):
-        os.makedirs(f'{results_paths}/reports')
 
     metadata = {}
     if os.path.exists(f'{tests_path}/metadata.json'):
