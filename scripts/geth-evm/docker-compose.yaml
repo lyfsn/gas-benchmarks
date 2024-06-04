@@ -2,7 +2,7 @@ version: "3.9"
 services:
   execution-sync:
     container_name: gas-execution-client-sync
-    image: ${EC_IMAGE_VERSION}
+    image: gethevm
     networks:
     - gas
     volumes:
@@ -17,12 +17,13 @@ services:
       execution-sync:
         condition: service_completed_successfully
     restart: unless-stopped
-    image: ${EC_IMAGE_VERSION}
+    image: gethevm
     networks:
     - gas
     volumes:
     - ${EC_DATA_DIR}:/var/lib/goethereum
     - ${EC_JWT_SECRET_PATH}:/tmp/jwt/jwtsecret
+    - /tmp/libevmone.so:./libevmone.so
     ports:
     - "30303:30303/tcp"
     - "30303:30303/udp"
@@ -39,8 +40,7 @@ services:
     - --http.addr=0.0.0.0
     - --http.vhosts=*
     - --http.corsdomain=*
-    - --http.api
-    - web3,eth,net
+    - --http.api=web3,eth,net
     - --datadir=/var/lib/goethereum
     - --port=30303
     - --http.port=8545
@@ -55,6 +55,7 @@ services:
     - --authrpc.vhosts=*
     - --metrics
     - --metrics.port=8008
+    - --vm.evm=/tmp/libevmone.so
     logging:
       driver: json-file
       options:

@@ -2,7 +2,7 @@ version: "3.9"
 services:
   execution-sync:
     container_name: gas-execution-client-sync
-    image: gethevm
+    image: ${EC_IMAGE_VERSION}
     networks:
     - gas
     volumes:
@@ -17,13 +17,12 @@ services:
       execution-sync:
         condition: service_completed_successfully
     restart: unless-stopped
-    image: gethevm
+    image: ${EC_IMAGE_VERSION}
     networks:
     - gas
     volumes:
     - ${EC_DATA_DIR}:/var/lib/goethereum
     - ${EC_JWT_SECRET_PATH}:/tmp/jwt/jwtsecret
-    - /tmp/libevmone.so:/root/gas-benchmarks/scripts/geth/libevmone.so
     ports:
     - "30303:30303/tcp"
     - "30303:30303/udp"
@@ -36,27 +35,26 @@ services:
     command:
     - --syncmode=full
     - --nat=none
-    # - --http
-    # - --http.addr=0.0.0.0
-    # - --http.vhosts=*
-    # - --http.corsdomain=*
-    # - --http.api
-    # - web3,eth,net
+    - --http
+    - --http.addr=0.0.0.0
+    - --http.vhosts=*
+    - --http.corsdomain=*
+    - --http.api
+    - web3,eth,net
     - --datadir=/var/lib/goethereum
     - --port=30303
-    # - --http.port=8545
+    - --http.port=8545
     - --networkid=1337
-    # - --ws
-    # - --ws.addr=0.0.0.0
-    # - --ws.port=8546
-    # - --ws.api=engine,eth,web3,net,debug
+    - --ws
+    - --ws.addr=0.0.0.0
+    - --ws.port=8546
+    - --ws.api=engine,eth,web3,net,debug
     - --authrpc.jwtsecret=/tmp/jwt/jwtsecret
     - --authrpc.addr=0.0.0.0
     - --authrpc.port=8551
     - --authrpc.vhosts=*
     - --metrics
     - --metrics.port=8008
-    - --vm.evm=/tmp/libevmone.so
     logging:
       driver: json-file
       options:
