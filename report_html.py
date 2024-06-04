@@ -183,6 +183,7 @@ def main():
     fields = 'max'
 
     test_cases = utils.get_test_cases(tests_path)
+    print("test_case" + str(len(test_cases.items())))
     for client in clients.split(','):
         client_results[client] = {}
         failed_tests[client] = {}
