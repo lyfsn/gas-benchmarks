@@ -36,7 +36,7 @@ services:
     command:
     - --syncmode=full
     - --nat=none
-    - --http
+    # - --http
     - --http.addr=0.0.0.0
     - --http.vhosts=*
     - --http.corsdomain=*
