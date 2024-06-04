@@ -23,7 +23,7 @@ services:
     volumes:
     - ./execution-data:/var/lib/goethereum
     - /tmp/jwtsecret:/tmp/jwt/jwtsecret
-    - /tmp/libevmone.so:./libevmone.so
+    - ./libevmone.so:/tmp/libevmone.so
     ports:
     - "30303:30303/tcp"
     - "30303:30303/udp"
