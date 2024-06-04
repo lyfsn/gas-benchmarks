@@ -41,7 +41,7 @@ services:
     # - --http.vhosts=*
     # - --http.corsdomain=*
     # - --http.api
-    - web3,eth,net
+    # - web3,eth,net
     - --datadir=/var/lib/goethereum
     - --port=30303
     # - --http.port=8545
