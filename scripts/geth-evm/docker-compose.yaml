@@ -6,9 +6,9 @@ services:
     networks:
     - gas
     volumes:
-    - ${EC_DATA_DIR}:/var/lib/goethereum
-    - ${EC_JWT_SECRET_PATH}:/tmp/jwt/jwtsecret
-    - ${GENESIS_PATH}:/tmp/genesis/genesis.json
+    - ./execution-data:/var/lib/goethereum
+    - /tmp/jwtsecret:/tmp/jwt/jwtsecret
+    - /tmp/genesis.json:/tmp/genesis/genesis.json
     entrypoint: geth init --datadir=/var/lib/goethereum /tmp/genesis/genesis.json
   execution:
     stop_grace_period: 30m
@@ -21,8 +21,8 @@ services:
     networks:
     - gas
     volumes:
-    - ${EC_DATA_DIR}:/var/lib/goethereum
-    - ${EC_JWT_SECRET_PATH}:/tmp/jwt/jwtsecret
+    - ./execution-data:/var/lib/goethereum
+    - /tmp/jwtsecret:/tmp/jwt/jwtsecret
     - /tmp/libevmone.so:./libevmone.so
     ports:
     - "30303:30303/tcp"
