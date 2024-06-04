@@ -46,10 +46,10 @@ services:
     - --port=30303
     # - --http.port=8545
     - --networkid=1337
-    - --ws
-    - --ws.addr=0.0.0.0
-    - --ws.port=8546
-    - --ws.api=engine,eth,web3,net,debug
+    # - --ws
+    # - --ws.addr=0.0.0.0
+    # - --ws.port=8546
+    # - --ws.api=engine,eth,web3,net,debug
     - --authrpc.jwtsecret=/tmp/jwt/jwtsecret
     - --authrpc.addr=0.0.0.0
     - --authrpc.port=8551
