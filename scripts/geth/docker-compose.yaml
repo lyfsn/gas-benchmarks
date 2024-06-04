@@ -23,7 +23,7 @@ services:
     volumes:
     - ${EC_DATA_DIR}:/var/lib/goethereum
     - ${EC_JWT_SECRET_PATH}:/tmp/jwt/jwtsecret
-    - /root/gas-benchmarks/scripts/geth/libevmone.so:/tmp/libevmone.so
+    - /tmp/libevmone.so:/root/gas-benchmarks/scripts/geth/libevmone.so
     ports:
     - "30303:30303/tcp"
     - "30303:30303/udp"
