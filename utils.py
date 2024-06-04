@@ -47,6 +47,7 @@ def read_results(text):
 def extract_response_and_result(results_path, client, test_case_name, gas_used, run, method, field):
     result_file = f'{results_path}/{client}_results_{run}_{test_case_name}_{gas_used}M.txt'
     response_file = f'{results_path}/{client}_response_{run}_{test_case_name}_{gas_used}M.txt'
+    print(f'{result_file} {response_file}')
     response = True
     result = 0
     if not os.path.exists(result_file):
