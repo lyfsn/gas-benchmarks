@@ -9,7 +9,7 @@ IMAGES="default"
 OUTPUT_DIR="results"
 
 # Parse command line arguments
-while getopts "t:w:c:r:i:" opt; do
+while getopts "t:w:c:r:i:o:" opt; do
   case $opt in
     t) TEST_PATH="$OPTARG" ;;
     w) WARMUP_FILE="$OPTARG" ;;
