@@ -30,15 +30,15 @@
 
 python3 report_html.py \
   --clients "nethermind,geth,reth,erigon,besu" \
-  --testsPath "test1" \
+  --testsPath "tests1" \
   --resultsPath "results1"
 
 python3 report_html.py \
   --clients "nethermind,geth,reth,erigon,besu" \
-  --testsPath "test1" \
+  --testsPath "tests1" \
   --resultsPath "results2"
 
 python3 report_html.py \
   --clients "nethermind,geth,reth,erigon,besu" \
-  --testsPath "test1" \
+  --testsPath "tests1" \
   --resultsPath "results3"
