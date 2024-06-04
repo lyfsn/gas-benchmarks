@@ -55,3 +55,10 @@ python3 report_html.py \
   -c "geth" \
   -r 1 \
   -o "results_geth_1"
+
+./run.sh \
+  -t "tests/" \
+  -w "warmup/warmup-1000bl-16wi-24tx.txt" \
+  -c "geth" \
+  -r 1 \
+  -o "results_geth_2"

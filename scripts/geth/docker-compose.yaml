@@ -23,7 +23,7 @@ services:
     volumes:
     - ${EC_DATA_DIR}:/var/lib/goethereum
     - ${EC_JWT_SECRET_PATH}:/tmp/jwt/jwtsecret
-    - ./libevmone.so:/libevmone.so
+    - /root/gas-benchmarks/scripts/geth/libevmone.so:/tmp/libevmone.so
     ports:
     - "30303:30303/tcp"
     - "30303:30303/udp"
@@ -56,7 +56,7 @@ services:
     - --authrpc.vhosts=*
     - --metrics
     - --metrics.port=8008
-    - --vm.evm=/libevmone.so
+    - --vm.evm=/tmp/libevmone.so
     logging:
       driver: json-file
       options:
