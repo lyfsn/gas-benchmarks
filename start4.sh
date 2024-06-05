@@ -40,4 +40,5 @@ python3 report_html.py \
 python3 report_html.py \
   --clients "nethermind" \
   --testsPath "tests3" \
-  --resultsPath "results3_1"
+  --resultsPath "results3_1" \
+  --runs 1

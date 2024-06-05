@@ -55,6 +55,7 @@ def extract_response_and_result(results_path, client, test_case_name, gas_used, 
     if not os.path.exists(response_file):
         return False, 0
     # Get the responses from the files
+    print("---1--")
     with open(response_file, 'r') as file:
         text = file.read()
         if len(text) == 0:
@@ -64,7 +65,9 @@ def extract_response_and_result(results_path, client, test_case_name, gas_used, 
             if len(line) < 1:
                 continue
             if not check_sync_status(line):
+                print("---2--")
                 return False, 0
+    print("---3--")
     # Get the results from the files
     with open(result_file, 'r') as file:
         sections = read_results(file.read())
