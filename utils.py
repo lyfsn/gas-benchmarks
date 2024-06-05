@@ -163,6 +163,7 @@ def calculate_percentiles(values, percentiles):
 
 def check_sync_status(json_data):
     data = json.loads(json_data)
+    print("---check_sync_status---", data)
     if 'result' not in data:
         return False
     if 'status' in data['result']:
