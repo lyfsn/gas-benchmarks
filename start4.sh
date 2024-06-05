@@ -36,3 +36,8 @@ python3 report_html.py \
   -c "nethermind" \
   -r 1 \
   -o results3_1 
+
+python3 report_html.py \
+  --clients "nethermind" \
+  --testsPath "tests3" \
+  --resultsPath "results3_1"

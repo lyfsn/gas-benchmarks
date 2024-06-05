@@ -74,6 +74,9 @@ def extract_response_and_result(results_path, client, test_case_name, gas_used, 
 
 
 def get_gas_table(client_results, client, test_cases, gas_set, method, metadata):
+    print("--gas_set---", gas_set)
+    print("--client_results---", client_results)
+
     gas_table_norm = {}
     results_per_test_case = {}
     for test_case, _ in test_cases.items():
@@ -88,7 +91,6 @@ def get_gas_table(client_results, client, test_cases, gas_set, method, metadata)
                     continue
                 print("-----debug-----", gas, "---",int(gas) / x * 1000)
                 results_per_test_case[test_case].append(int(gas) / x * 1000)
-    print("--client_results---", client_results)
 
     for test_case, _ in test_cases.items():
         results_norm = results_per_test_case[test_case]
