@@ -19,7 +19,7 @@ nohup \
   -t "tests3/" \
   -w "warmup/warmup-1000bl-16wi-24tx.txt" \
   -c "nethermind,geth,reth,erigon,besu" \
-  -r 1 \
+  -r 4 \
   -o results3_1 
 
 python3 report_html.py \
