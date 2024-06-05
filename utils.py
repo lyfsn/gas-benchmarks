@@ -66,7 +66,8 @@ def extract_response_and_result(results_path, client, test_case_name, gas_used, 
                 continue
             if not check_sync_status(line):
                 print("---2--")
-                return False, 0
+                # return False, 0
+                continue
     print("---3--")
     # Get the results from the files
     with open(result_file, 'r') as file:
