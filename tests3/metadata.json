@@ -1,9 +1,7 @@
 [
   {
     "GasUsed": [
-      1000000,
-      2000000,
-      3000000
+      1000000
     ],
     "Name": "MyTest",
     "Title": "MyTestTitle",
