@@ -93,7 +93,7 @@ def get_gas_table(client_results, client, test_cases, gas_set, method, metadata)
         gas_table_norm[test_case] = ['' for _ in range(8)]
         # test_case_name, description, N, MGgas/s, mean, max, min. std, p50, p95, p99
         # (norm) title, description, N , max, min, p50, p95, p99
-        print("test_case", test_case, "---",metadata, "---", test_case in metadata )
+        print("--results_per_test_case---", results_per_test_case)
         if test_case in metadata:
             gas_table_norm[test_case][0] = metadata[test_case]['Title']
             gas_table_norm[test_case][7] = metadata[test_case]['Description']
