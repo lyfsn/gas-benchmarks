@@ -217,6 +217,7 @@ def main():
                         client_results[client][test_case_name][gas][method].append(results)
                         failed_tests[client][test_case_name][gas][method].append(not responses)
 
+    print("--test-case-set--", test_cases)
     gas_set = set()
     for test_case_name, test_case_gas in test_cases.items():
         for gas in test_case_gas:
