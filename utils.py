@@ -87,6 +87,7 @@ def get_gas_table(client_results, client, test_cases, gas_set, method, metadata)
                 if x == 0:
                     continue
                 results_per_test_case[test_case].append(int(gas) / x * 1000)
+    print("--client_results---", client_results)
 
     for test_case, _ in test_cases.items():
         results_norm = results_per_test_case[test_case]
