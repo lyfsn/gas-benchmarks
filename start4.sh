@@ -21,3 +21,8 @@ nohup \
   -c "nethermind,geth,reth,erigon,besu" \
   -r 1 \
   -o results3_1 
+
+python3 report_html.py \
+  --clients "nethermind,geth,reth,erigon,besu" \
+  --testsPath "tests3" \
+  --resultsPath "results3_1"

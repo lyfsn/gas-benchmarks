@@ -148,7 +148,7 @@ def get_html_report(client_results, clients, results_paths, test_cases, methods,
 
     soup = BeautifulSoup(results_to_print, 'lxml')
     formatted_html = soup.prettify()
-    print(formatted_html)
+    # print(formatted_html)
     if not os.path.exists(f'{results_paths}/reports'):
         os.makedirs(f'{results_paths}/reports')
     with open(f'{results_paths}/reports/index.html', 'w') as file:
