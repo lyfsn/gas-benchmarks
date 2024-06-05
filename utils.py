@@ -47,7 +47,7 @@ def read_results(text):
 def extract_response_and_result(results_path, client, test_case_name, gas_used, run, method, field):
     result_file = f'{results_path}/{client}_results_{run}_{test_case_name}_{gas_used}M.txt'
     response_file = f'{results_path}/{client}_response_{run}_{test_case_name}_{gas_used}M.txt'
-    print("----", result_file, response_file)
+    # print("----", result_file, response_file)
     response = True
     result = 0
     if not os.path.exists(result_file):
@@ -68,6 +68,7 @@ def extract_response_and_result(results_path, client, test_case_name, gas_used, 
     # Get the results from the files
     with open(result_file, 'r') as file:
         sections = read_results(file.read())
+        print("------result----",result_file, sections)
         if method not in sections:
             return False, 0
         result = sections[method].fields[field]
