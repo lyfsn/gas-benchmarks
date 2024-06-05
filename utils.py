@@ -86,6 +86,7 @@ def get_gas_table(client_results, client, test_cases, gas_set, method, metadata)
             for x in results:
                 if x == 0:
                     continue
+                print("-----debug-----", gas, "---",int(gas) / x * 1000)
                 results_per_test_case[test_case].append(int(gas) / x * 1000)
     print("--client_results---", client_results)
 

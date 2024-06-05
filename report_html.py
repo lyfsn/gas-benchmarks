@@ -77,7 +77,7 @@ def get_html_report(client_results, clients, results_paths, test_cases, methods,
                              '</thread>\n'
                              '<tbody>\n')
         gas_table_norm = utils.get_gas_table(client_results, client, test_cases, gas_set, methods[0], metadata)
-        print("---gas-table-norm--", gas_table_norm)
+        # print("---gas-table-norm--", gas_table_norm)
         csv_table[client] = gas_table_norm
         for test_case, data in gas_table_norm.items():
             results_to_print += (f'<tr>\n<td class="title">{data[0]}</td>\n'
