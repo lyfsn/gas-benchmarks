@@ -215,6 +215,7 @@ def main():
                     for run in range(1, runs + 1):
                         responses, results = utils.extract_response_and_result(results_paths, client, test_case_name,
                                                                                gas, run, method, fields)
+                        print("----handle--result----",client, test_case_name, gas, responses, results)
                         client_results[client][test_case_name][gas][method].append(results)
                         failed_tests[client][test_case_name][gas][method].append(not responses)
 

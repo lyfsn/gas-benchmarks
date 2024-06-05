@@ -74,8 +74,8 @@ def extract_response_and_result(results_path, client, test_case_name, gas_used, 
 
 
 def get_gas_table(client_results, client, test_cases, gas_set, method, metadata):
-    print("--gas_set---", gas_set)
-    print("--client_results---", client_results)
+    # print("--gas_set---", gas_set)
+    # print("--client_results---", client_results)
 
     gas_table_norm = {}
     results_per_test_case = {}
