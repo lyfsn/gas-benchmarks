@@ -194,7 +194,7 @@ def get_test_cases(tests_path):
             continue
         for file in files:
             tests_cases_list.append(os.path.join(root, file))
-    print("---tests_cases_list---",tests_cases_list)
+    # print("---tests_cases_list---",tests_cases_list)
     for test_case in tests_cases_list:
         if test_case.endswith('.txt'):
             test_case_parsed = test_case.split('/')[-1].split('_')
