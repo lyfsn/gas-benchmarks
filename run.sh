@@ -30,7 +30,6 @@ mkdir -p "$OUTPUT_DIR"
 
 # Install dependencies
 pip install -r requirements.txt
-make prepare_tools
 
 # Function to check if the port is open
 check_port_open() {
