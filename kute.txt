@@ -1,0 +1,23 @@
+
+
+
+./nethermind/tools/Nethermind.Tools.Kute/bin/Release/net8.0/Nethermind.Tools.Kute \
+  -i tests1/Address/Address_30M.txt \
+  -s scripts/geth/jwtsecret \
+  -r respo/1.txt \
+  -a http://127.0.0.1:8551
+
+
+
+./nethermind/tools/Nethermind.Tools.Kute/bin/Release/net8.0/Nethermind.Tools.Kute \
+  -i warmup/warmup-100bl-16wi-32tx.txt \
+  -s scripts/geth/jwtsecret \
+  -r respo/1.txt \
+  -a http://127.0.0.1:8551
+
+
+./nethermind/tools/Nethermind.Tools.Kute/bin/Release/net8.0/Nethermind.Tools.Kute \
+  -i test3/rpc.0.txt \
+  -s scripts/geth/jwtsecret \
+  -r respo/2.txt \
+  -a http://127.0.0.1:8551
