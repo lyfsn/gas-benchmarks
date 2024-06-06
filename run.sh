@@ -30,6 +30,7 @@ mkdir -p "$OUTPUT_DIR"
 
 # Install dependencies
 pip install -r requirements.txt
+apt install jq
 
 # Function to check if the block hash matches
 check_block_hash() {
