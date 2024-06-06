@@ -77,7 +77,7 @@ for run in $(seq 1 $RUNS); do
     block_hash_time=$(check_block_hash $client)
 
     # Calculate the interval
-    interval=$((port_open_time - start_time))
+    interval=$((block_hash_time - start_time))
     
     # Write the interval to a file in OUTPUT_DIR
     output_file="${OUTPUT_DIR}/${client}_${i}.txt"
