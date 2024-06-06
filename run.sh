@@ -31,12 +31,22 @@ mkdir -p "$OUTPUT_DIR"
 # Install dependencies
 pip install -r requirements.txt
 
-# Function to check if the port is open
-check_port_open() {
+# Function to check if the block hash matches
+check_block_hash() {
   local client=$1
-  while ! nc -z 127.0.0.1 8551; do   
+  local expected_hash="0xfcf55e2e15afed0cd61a28b1b1966ac1a2326e7cd5cd062743fa5e51f47f8417"
+  local block_hash=""
+  local start_time=$(date +%s%3N)
+  
+  while [ "$block_hash" != "$expected_hash" ]; do
+    response=$(curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["0x0", false],"id":1}' -H "Content-Type: application/json" http://localhost:8545)
+    block_hash=$(echo $response | jq -r '.result.hash')
+    if [ "$block_hash" == "null" ]; then
+      block_hash=""
+    fi
     sleep 1
   done
+
   echo $(date +%s%3N)  # Return the timestamp in milliseconds
 }
 
@@ -62,8 +72,8 @@ for run in $(seq 1 $RUNS); do
       python3 setup_node.py --client $client --image $image
     fi
 
-    # Record the time when the port is open
-    port_open_time=$(check_port_open $client)
+    # Record the time when the block hash matches
+    block_hash_time=$(check_block_hash $client)
 
     # Calculate the interval
     interval=$((port_open_time - start_time))
