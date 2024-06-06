@@ -29,6 +29,7 @@ def set_image(client, el_images, run_path):
           "EC_JWT_SECRET_PATH=/tmp/jwtsecret\n" \
           f"{specifics}"
 
+    print("--setup-env--",env)
     env_file_path = os.path.join(run_path, ".env")
     if os.path.exists(env_file_path):
         os.remove(env_file_path)
