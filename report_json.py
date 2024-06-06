@@ -163,6 +163,12 @@ def get_html_report(client_results, clients, results_paths, test_cases, methods,
             for test_case, data in gas_table.items():
                 csvwriter.writerow([data[0], data[2], data[3], data[4], data[5], data[1], data[6], data[7]])
 
+def get_json_report(client_results, results_paths):
+    if not os.path.exists(f'{results_paths}/reports'):
+        os.makedirs(f'{results_paths}/reports')
+    
+    with open(f'{results_paths}/reports/result.json', 'w') as file:
+        json.dump(client_results, file, indent=4)
 
 def main():
     parser = argparse.ArgumentParser(description='Benchmark script')
@@ -228,8 +234,7 @@ def main():
         for item in data:
             metadata[item['Name']] = item
 
-    print("---client_results---", client_results)
-    get_html_report(client_results, clients.split(','), results_paths, test_cases, methods, gas_set, metadata, images)
+    get_json_report(client_results, results_paths)
 
     print('Done!')
 
