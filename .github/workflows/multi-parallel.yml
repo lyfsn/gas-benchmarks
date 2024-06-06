@@ -199,7 +199,7 @@ jobs:
 
       - name: Zip the results folder
         run: |
-          zip -r reports.zip reports
+          zip -r reports.zip extracted-results/results/reports
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
