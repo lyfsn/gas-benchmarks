@@ -43,6 +43,11 @@ check_port_open() {
 # Run benchmarks
 for run in $(seq 1 $RUNS); do
   for i in "${!CLIENT_ARRAY[@]}"; do
+    cd "scripts/$client"
+    docker compose down
+    sudo rm -rf execution-data
+    cd ../..
+
     client="${CLIENT_ARRAY[$i]}"
     image="${IMAGE_ARRAY[$i]}"
 
