@@ -32,11 +32,23 @@ mkdir -p "$OUTPUT_DIR"
 pip install -r requirements.txt
 make prepare_tools
 
+# Function to check if the port is open
+check_port_open() {
+  local client=$1
+  while ! nc -z 127.0.0.1 8551; do   
+    sleep 1
+  done
+  echo $(date +%s%3N)  # Return the timestamp in milliseconds
+}
+
 # Run benchmarks
 for run in $(seq 1 $RUNS); do
   for i in "${!CLIENT_ARRAY[@]}"; do
     client="${CLIENT_ARRAY[$i]}"
     image="${IMAGE_ARRAY[$i]}"
+
+    # Record the start time
+    start_time=$(date +%s%3N)
 
     if [ -z "$image" ]; then
       echo "Image input is empty, using default image."
@@ -46,13 +58,15 @@ for run in $(seq 1 $RUNS); do
       python3 setup_node.py --client $client --image $image
     fi
 
-    if [ -z "$WARMUP_FILE" ]; then
-      echo "Running script without warm up."
-      python3 run_kute.py --output "$OUTPUT_DIR" --testsPath "$TEST_PATH" --jwtPath /tmp/jwtsecret --client $client --run $run
-    else
-      echo "Using provided warm up file: $WARMUP_FILE"
-      python3 run_kute.py --output "$OUTPUT_DIR" --testsPath "$TEST_PATH" --jwtPath /tmp/jwtsecret --warmupPath "$WARMUP_FILE" --client $client --run $run
-    fi
+    # Record the time when the port is open
+    port_open_time=$(check_port_open $client)
+
+    # Calculate the interval
+    interval=$((port_open_time - start_time))
+    
+    # Write the interval to a file in OUTPUT_DIR
+    output_file="${OUTPUT_DIR}/${client}_${i}.txt"
+    echo "$client: $interval ms" > "$output_file"
 
     cd "scripts/$client"
     docker compose down
@@ -61,10 +75,3 @@ for run in $(seq 1 $RUNS); do
   done
 done
 
-# Get metrics from results
-python3 report_tables.py --resultsPath "$OUTPUT_DIR" --clients "$CLIENTS" --testsPath "$TEST_PATH" --runs $RUNS
-python3 report_html.py --resultsPath "$OUTPUT_DIR" --clients "$CLIENTS" --testsPath "$TEST_PATH" --runs $RUNS
-
-
-# Zip the results folder
-zip -r "${OUTPUT_DIR}.zip" "$OUTPUT_DIR"
