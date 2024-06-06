@@ -64,6 +64,7 @@ def extract_response_and_result(results_path, client, test_case_name, gas_used, 
             if len(line) < 1:
                 continue
             if not check_sync_status(line):
+                print("---invlid---")
                 return False, 0
     # Get the results from the files
     with open(result_file, 'r') as file:
