@@ -47,6 +47,7 @@ def read_results(text):
 def extract_response_and_result(results_path, client, test_case_name, gas_used, run, method, field):
     result_file = f'{results_path}/{client}_results_{run}_{test_case_name}_{gas_used}M.txt'
     response_file = f'{results_path}/{client}_response_{run}_{test_case_name}_{gas_used}M.txt'
+    print("---extract_response_and_result----",response_file)
     response = True
     result = 0
     if not os.path.exists(result_file):
@@ -59,7 +60,7 @@ def extract_response_and_result(results_path, client, test_case_name, gas_used, 
         if len(text) == 0:
             return False, 0
         # Get latest line
-        for line in reverse(text.split('\n')):
+        for line in reversed(text.split('\n')):
             if len(line) < 1:
                 continue
             if not check_sync_status(line):
@@ -166,6 +167,7 @@ def check_sync_status(json_data):
 def check_client_response_is_valid(results_paths, client, test_case, length):
     for i in range(1, length + 1):
         response_file = f'{results_paths}/{client}_response_{i}_{test_case}'
+        print("--check_client_response_is_valid--", response_file)
         if not os.path.exists(response_file):
             return False
         with open(response_file, 'r') as file:
