@@ -3,11 +3,13 @@ import json
 import sys
 
 def filter_rpc_files(directory):
-    # Get list of all files in the directory
-    files = [f for f in os.listdir(directory) if f.startswith("rpc.") and f.endswith(".txt")]
+    # Get list of all .txt files in the directory
+    files = [f for f in os.listdir(directory) if f.endswith(".txt")]
+    print(f"All .txt files in directory: {files}")
     
     for file_name in files:
         file_path = os.path.join(directory, file_name)
+        print(f"Filtering {file_path}")
         filtered_lines = []
 
         with open(file_path, 'r') as file:

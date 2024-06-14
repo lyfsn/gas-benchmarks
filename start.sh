@@ -12,3 +12,19 @@ nohup \
   -o "results" \
   > output.log 2>&1 &
 
+
+
+./run.sh \
+  -t "testburnt/" \
+  -w "./testburnt/Burnt/Burnt_90M.txt" \
+  -c "nethermind" \
+  -r 1 \
+  -o "results"
+
+
+./run.sh \
+  -t "testburnt/" \
+  -w "./testburnt/Burnt/Burnt_90M.txt" \
+  -c "nethermind,erigon,geth,reth,besu" \
+  -r 8 \
+  -o "results"
