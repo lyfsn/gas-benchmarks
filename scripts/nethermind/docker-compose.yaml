@@ -41,7 +41,7 @@ services:
     - --Metrics.ExposePort=8009
     - --Sync.MaxAttemptsToUpdatePivot=0
     - --JsonRpc.GasCap=9223372036854775807
-    - --JsonRpc.EnabledModules=Eth,Subscribe,Trace,TxPool,Web3,Personal,Proof,Net,Parity,Health,Rpc
+    - --JsonRpc.EnabledModules=Eth,Subscribe,Trace,TxPool,Web3,Personal,Proof,Net,Parity,Health,Rpc,Debug
     logging:
       driver: json-file
       options:
