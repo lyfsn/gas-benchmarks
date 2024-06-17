@@ -25,8 +25,8 @@ def save_metadata(computer_specs, images, output_path):
     with open(output_path, 'w') as file:
         json.dump(metadata, file, indent=4)
 
-def main(date, data_type):
-    base_path = f"results-{date}/{data_type}"
+def main(date):
+    base_path = f"results-{date}"
     computer_specs_path = os.path.join(base_path, "computer_specs.txt")
     images_path = "./images.yaml"
     output_path = os.path.join(base_path, "reports", "metadata.json")
@@ -39,10 +39,9 @@ def main(date, data_type):
     save_metadata(computer_specs, images, output_path)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python script.py <date> <data_type>")
+    if len(sys.argv) != 2:
+        print("Usage: python script.py <date>")
         sys.exit(1)
 
     date = sys.argv[1]
-    data_type = sys.argv[2]
-    main(date, data_type)
+    main(date)
