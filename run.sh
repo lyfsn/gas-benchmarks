@@ -64,6 +64,7 @@ done
 # Get metrics from results
 python3 report_tables.py --resultsPath "$OUTPUT_DIR" --clients "$CLIENTS" --testsPath "$TEST_PATH" --runs $RUNS
 python3 report_html.py --resultsPath "$OUTPUT_DIR" --clients "$CLIENTS" --testsPath "$TEST_PATH" --runs $RUNS
+python3 report_json.py --resultsPath "$OUTPUT_DIR" --clients "$CLIENTS" --testsPath "$TEST_PATH" --runs $RUNS
 
 
 # Zip the results folder
