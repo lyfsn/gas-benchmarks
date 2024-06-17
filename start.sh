@@ -25,7 +25,7 @@ nohup \
 ./run.sh \
   -t "testburnt/" \
   -w "./testburnt/Burnt/Burnt_90M.txt" \
-  -c "nethermind,erigon,geth,reth,besu" \
+  -c "nethermind" \
   -r 1 \
   -o "results"
 
