@@ -163,12 +163,50 @@ def get_html_report(client_results, clients, results_paths, test_cases, methods,
             for test_case, data in gas_table.items():
                 csvwriter.writerow([data[0], data[2], data[3], data[4], data[5], data[1], data[6], data[7]])
 
-def get_json_report(client_results, results_paths):
+def get_json_report(client_results, clients, test_cases, methods, gas_set, metadata, results_paths):
     if not os.path.exists(f'{results_paths}/reports'):
         os.makedirs(f'{results_paths}/reports')
     
+    report_data = {
+        "clients": {},
+        "metadata": metadata,
+        "test_cases": list(test_cases.keys())
+    }
+
+    for client, test_case_data in client_results.items():
+        report_data["clients"][client] = {
+            "name": client,
+            "results": []
+        }
+        
+        for test_case, gas_data in test_case_data.items():
+            for gas, method_data in gas_data.items():
+                for method, results in method_data.items():
+                    processed_results = {
+                        "test_case": test_case,
+                        "gas": gas,
+                        "method": method,
+                        "max": max(results) if results else None,
+                        "min": min(results) if results else None,
+                        "p50": calculate_percentile(results, 50) if results else None,
+                        "p95": calculate_percentile(results, 95) if results else None,
+                        "p99": calculate_percentile(results, 99) if results else None,
+                        "n": len(results),
+                        "description": metadata.get(test_case, {}).get("Description", "")
+                    }
+                    report_data["clients"][client]["results"].append(processed_results)
+
     with open(f'{results_paths}/reports/result.json', 'w') as file:
-        json.dump(client_results, file, indent=4)
+        json.dump(report_data, file, indent=4)
+
+
+def calculate_percentile(data, percentile):
+    size = len(data)
+    if size == 0:
+        return None
+    sorted_data = sorted(data)
+    index = int(size * percentile / 100)
+    return sorted_data[index]
 
 def main():
     parser = argparse.ArgumentParser(description='Benchmark script')
@@ -234,7 +272,7 @@ def main():
         for item in data:
             metadata[item['Name']] = item
 
-    get_json_report(client_results, results_paths)
+    get_json_report(client_results, clients.split(','), test_cases, methods, gas_set, metadata, results_paths)
 
     print('Done!')
 
