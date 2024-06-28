@@ -166,6 +166,7 @@ def check_sync_status(json_data):
 def check_client_response_is_valid(results_paths, client, test_case, length):
     for i in range(1, length + 1):
         response_file = f'{results_paths}/{client}_response_{i}_{test_case}'
+        print("--check_client_response_is_valid--", response_file)
         if not os.path.exists(response_file):
             return False
         with open(response_file, 'r') as file:
@@ -173,7 +174,7 @@ def check_client_response_is_valid(results_paths, client, test_case, length):
             if len(text) == 0:
                 return False
             # Get latest line
-            for line in text.split('\n'):
+            for line in reversed(text.split('\n')):
                 if len(line) < 1:
                     continue
                 if not check_sync_status(line):
@@ -262,6 +263,10 @@ class PayloadResponse:
 def print_computer_specs():
     info = "Computer Specs:\n"
     cpu = cpuinfo.get_cpu_info()
+    try:
+        cpu_freq = psutil.cpu_freq().current
+    except AttributeError:
+        cpu_freq = "N/A"
     system_info = {
         'Processor': platform.processor(),
         'System': platform.system(),
@@ -272,7 +277,7 @@ def print_computer_specs():
         'RAM': f'{psutil.virtual_memory().total / (1024 ** 3):.2f} GB',
         'CPU': cpu['brand_raw'],
         'Numbers of CPU': cpu['count'],
-        'CPU GHz': cpu['hz_actual_friendly']
+        'CPU GHz': f'{cpu_freq} MHz' if cpu_freq != "N/A" else "N/A"
     }
 
     # Print the specifications
