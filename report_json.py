@@ -167,36 +167,18 @@ def get_json_report(client_results, clients, test_cases, methods, gas_set, metad
     if not os.path.exists(f'{results_paths}/reports'):
         os.makedirs(f'{results_paths}/reports')
 
+    filtered_metadata = {}
+    for key, value in metadata.items():
+        filtered_metadata[key] = {k: v for k, v in value.items() if k != 'GasUsed'}
+
     report_data = {
         "clients": {},
-        "metadata": metadata,
-        "test_cases": list(test_cases.keys())
+        "metadata": filtered_metadata,
     }
 
     for client in clients:
         gas_table_norm = utils.get_gas_table(client_results, client, test_cases, gas_set, methods[0], metadata)
-        report_data["clients"][client] = {
-            "name": client,
-            "results": [],
-            "gas_table": gas_table_norm
-        }
-
-        for test_case, gas_data in client_results[client].items():
-            for gas, method_data in gas_data.items():
-                for method, results in method_data.items():
-                    processed_results = {
-                        "test_case": test_case,
-                        "gas": gas,
-                        "method": method,
-                        "max": max(results) if results else None,
-                        "min": min(results) if results else None,
-                        "p50": calculate_percentile(results, 50) if results else None,
-                        "p95": calculate_percentile(results, 95) if results else None,
-                        "p99": calculate_percentile(results, 99) if results else None,
-                        "n": len(results),
-                        "description": metadata.get(test_case, {}).get("Description", "")
-                    }
-                    report_data["clients"][client]["results"].append(processed_results)
+        report_data["clients"][client] = gas_table_norm
 
     with open(f'{results_paths}/reports/result.json', 'w') as file:
         json.dump(report_data, file, indent=4)
