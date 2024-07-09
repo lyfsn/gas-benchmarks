@@ -167,18 +167,20 @@ def get_json_report(client_results, clients, test_cases, methods, gas_set, metad
     if not os.path.exists(f'{results_paths}/reports'):
         os.makedirs(f'{results_paths}/reports')
 
-    filtered_metadata = {}
-    for key, value in metadata.items():
-        filtered_metadata[key] = {k: v for k, v in value.items() if k != 'GasUsed'}
-
-    report_data = {
-        "clients": {},
-        "metadata": filtered_metadata,
-    }
+    report_data = {}
 
     for client in clients:
         gas_table_norm = utils.get_gas_table(client_results, client, test_cases, gas_set, methods[0], metadata)
-        report_data["clients"][client] = gas_table_norm
+        report_data[client] = {
+            "title": gas_table_norm[0],
+            "max": gas_table_norm[2],
+            "p50": gas_table_norm[3],
+            "p95": gas_table_norm[4],
+            "p99": gas_table_norm[5],
+            "min": gas_table_norm[1],
+            "n": gas_table_norm[6],
+            "description": gas_table_norm[7]
+        }
 
     with open(f'{results_paths}/reports/result.json', 'w') as file:
         json.dump(report_data, file, indent=4)
