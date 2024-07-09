@@ -166,20 +166,22 @@ def get_html_report(client_results, clients, results_paths, test_cases, methods,
 def get_json_report(client_results, clients, test_cases, methods, gas_set, metadata, results_paths):
     if not os.path.exists(f'{results_paths}/reports'):
         os.makedirs(f'{results_paths}/reports')
-    
+
     report_data = {
         "clients": {},
         "metadata": metadata,
         "test_cases": list(test_cases.keys())
     }
 
-    for client, test_case_data in client_results.items():
+    for client in clients:
+        gas_table_norm = utils.get_gas_table(client_results, client, test_cases, gas_set, methods[0], metadata)
         report_data["clients"][client] = {
             "name": client,
-            "results": []
+            "results": [],
+            "gas_table": gas_table_norm
         }
-        
-        for test_case, gas_data in test_case_data.items():
+
+        for test_case, gas_data in client_results[client].items():
             for gas, method_data in gas_data.items():
                 for method, results in method_data.items():
                     processed_results = {
