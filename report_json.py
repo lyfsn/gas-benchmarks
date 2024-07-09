@@ -171,16 +171,20 @@ def get_json_report(client_results, clients, test_cases, methods, gas_set, metad
 
     for client in clients:
         gas_table_norm = utils.get_gas_table(client_results, client, test_cases, gas_set, methods[0], metadata)
-        report_data[client] = {
-            "title": gas_table_norm[0],
-            "max": gas_table_norm[2],
-            "p50": gas_table_norm[3],
-            "p95": gas_table_norm[4],
-            "p99": gas_table_norm[5],
-            "min": gas_table_norm[1],
-            "n": gas_table_norm[6],
-            "description": gas_table_norm[7]
-        }
+        if client not in report_data:
+            report_data[client] = []
+
+        for test_case, data in gas_table_norm.items():
+            report_data[client].append({
+                "title": data[0],
+                "max": data[2],
+                "p50": data[3],
+                "p95": data[4],
+                "p99": data[5],
+                "min": data[1],
+                "n": data[6],
+                "description": data[7]
+            })
 
     with open(f'{results_paths}/reports/result.json', 'w') as file:
         json.dump(report_data, file, indent=4)
