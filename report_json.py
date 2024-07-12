@@ -172,7 +172,7 @@ def get_json_report(client_results, clients, test_cases, methods, gas_set, metad
     for client in clients:
         gas_table_norm = utils.get_gas_table(client_results, client, test_cases, gas_set, methods[0], metadata)
         if client not in report_data:
-            report_data[client] = []
+            report_data[client] = {}
 
         for test_case, data in gas_table_norm.items():
             report_data[client][test_case] = {
