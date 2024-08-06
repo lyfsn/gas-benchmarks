@@ -24,6 +24,7 @@ services:
     command:
     - --genesis-file=/tmp/chainspec/chainspec.json
     - --bonsai-historical-block-limit=10000
+    - --bonsai-trie-logs-pruning-window-size=10001
     - --data-path=/var/lib/besu/data
     - --metrics-enabled=true
     - --metrics-host=0.0.0.0
