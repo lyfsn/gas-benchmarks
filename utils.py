@@ -153,6 +153,10 @@ def calculate_percentiles(values, percentiles):
 
 def check_sync_status(json_data):
     data = json.loads(json_data)
+    if 'error' in data:
+        # Unsupported fork
+        if data['error']['code'] == -38005:
+            return True
     if 'result' not in data:
         return False
     if 'status' in data['result']:
