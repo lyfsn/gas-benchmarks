@@ -46,12 +46,41 @@ for run in $(seq 1 $RUNS); do
       python3 setup_node.py --client $client --image $image
     fi
 
+    # new for erigon
     if [ -z "$WARMUP_FILE" ]; then
       echo "Running script without warm up."
-      python3 run_kute.py --output "$OUTPUT_DIR" --testsPath "$TEST_PATH" --jwtPath /tmp/jwtsecret --client $client --run $run
+      for file in "$TEST_PATH"Burnt/*.txt; do
+        echo "Running script with file: $file"
+        if [ -z "$image" ]; then
+          echo "Image input is empty, using default image."
+          python3 setup_node.py --client $client
+        else
+          echo "Using provided image: $image for $client"
+          python3 setup_node.py --client $client --image $image
+        fi
+        python3 run_kute.py --output "$OUTPUT_DIR" --testsPath $file --jwtPath /tmp/jwtsecret --client $client --run $run
+        cd "scripts/$client"
+        docker compose down
+        sudo rm -rf execution-data
+        cd ../..
+      done
     else
       echo "Using provided warm up file: $WARMUP_FILE"
-      python3 run_kute.py --output "$OUTPUT_DIR" --testsPath "$TEST_PATH" --jwtPath /tmp/jwtsecret --warmupPath "$WARMUP_FILE" --client $client --run $run
+      for file in "$TEST_PATH"Burnt/*.txt; do
+        echo "Running script with file: $file"
+        if [ -z "$image" ]; then
+          echo "Image input is empty, using default image."
+          python3 setup_node.py --client $client
+        else
+          echo "Using provided image: $image for $client"
+          python3 setup_node.py --client $client --image $image
+        fi
+        python3 run_kute.py --output "$OUTPUT_DIR" --testsPath $file --jwtPath /tmp/jwtsecret --warmupPath "$WARMUP_FILE" --client $client --run $run
+        cd "scripts/$client"
+        docker compose down
+        sudo rm -rf execution-data
+        cd ../..
+      done
     fi
 
     cd "scripts/$client"

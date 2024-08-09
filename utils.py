@@ -157,6 +157,9 @@ def check_sync_status(json_data):
         # Unsupported fork
         if data['error']['code'] == -38005:
             return True
+        # main chain predecessor cannot be found
+        if data['error']['code'] == -32602:
+            return True
     if 'result' not in data:
         return False
     if 'status' in data['result']:
