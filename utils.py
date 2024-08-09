@@ -83,7 +83,7 @@ def get_gas_table(client_results, client, test_cases, gas_set, method, metadata)
             if test_case not in results_per_test_case:
                 results_per_test_case[test_case] = []
             results = client_results[client][test_case][gas][method]
-            print("---debug---", results)
+            print("---debug---", results, gas)
             for x in results:
                 if x == 0:
                     continue
