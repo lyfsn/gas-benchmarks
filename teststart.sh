@@ -36,4 +36,5 @@ python3 setup_node.py --client erigon
 ./nethermind/tools/Nethermind.Tools.Kute/bin/Release/net8.0/Nethermind.Tools.Kute -i testburnt/Burnt/Burnt_113M.txt -s /tmp/jwtsecret -r results/erigon_113.txt
 ./nethermind/tools/Nethermind.Tools.Kute/bin/Release/net8.0/Nethermind.Tools.Kute -i testburnt/Burnt/Burnt_265M.txt -s /tmp/jwtsecret -r results/erigon_265.txt
 ./nethermind/tools/Nethermind.Tools.Kute/bin/Release/net8.0/Nethermind.Tools.Kute -i testburnt/Burnt/Burnt_409M.txt -s /tmp/jwtsecret -r results/erigon_409.txt
+./nethermind/tools/Nethermind.Tools.Kute/bin/Release/net8.0/Nethermind.Tools.Kute -i testburnt/Burnt/Burnt_968M.txt -s /tmp/jwtsecret -r results/erigon_968.txt
 
