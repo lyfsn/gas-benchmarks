@@ -90,8 +90,6 @@ def get_gas_table(client_results, client, test_cases, gas_set, method, metadata)
 
     for test_case, _ in test_cases.items():
         results_norm = results_per_test_case[test_case]
-        print("--debug--1-", test_case)
-        print("--debug--2-", results_norm)
         gas_table_norm[test_case] = ['' for _ in range(8)]
         # test_case_name, description, N, MGgas/s, mean, max, min. std, p50, p95, p99
         # (norm) title, description, N , max, min, p50, p95, p99
@@ -158,6 +156,9 @@ def check_sync_status(json_data):
     if 'error' in data:
         # Unsupported fork
         if data['error']['code'] == -38005:
+            return True
+        # main chain predecessor cannot be found
+        if data['error']['code'] == -32602:
             return True
     if 'result' not in data:
         return False
