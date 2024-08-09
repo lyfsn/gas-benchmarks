@@ -5,6 +5,7 @@ import json
 import os
 import subprocess
 import time
+import re
 
 from utils import print_computer_specs
 
