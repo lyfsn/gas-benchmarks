@@ -4,6 +4,7 @@ import datetime
 import json
 import os
 import subprocess
+import time
 
 from utils import print_computer_specs
 
@@ -94,6 +95,7 @@ def main():
             name = test_case_path.split('/')[-1].split('.')[0]
             response_file = os.path.join(output_folder, f'{client}_response_{run}_{name}.txt')
             print(f"Running {client} for the {run} time with test case {test_case_path}")
+            time.sleep(3)
             response = run_command(test_case_path, jwt_path, response_file, execution_url, kute_arguments)
             save_to(output_folder, f'{client}_results_{run}_{name}.txt',
                     response)
