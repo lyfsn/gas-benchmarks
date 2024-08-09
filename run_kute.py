@@ -89,6 +89,8 @@ def main():
                     continue
                 tests_cases.append(os.path.join(root, file))
         for test_case_path in tests_cases:
+            if test_case_path.endswith('metadata.json'):
+                continue
             name = test_case_path.split('/')[-1].split('.')[0]
             response_file = os.path.join(output_folder, f'{client}_response_{run}_{name}.txt')
             print(f"Running {client} for the {run} time with test case {test_case_path}")
