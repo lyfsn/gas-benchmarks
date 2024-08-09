@@ -28,6 +28,11 @@ def save_to(output_folder, file_name, content):
     with open(output_path, "w") as file:
         file.write(content)
 
+def extract_number(test_case_path):
+    match = re.search(r'(\d+)M', test_case_path)
+    if match:
+        return int(match.group(1))
+    return 0
 
 def main():
     parser = argparse.ArgumentParser(description='Benchmark script')
@@ -89,6 +94,7 @@ def main():
                 if file.endswith('metadata.txt'):
                     continue
                 tests_cases.append(os.path.join(root, file))
+        tests_cases.sort(key=extract_number)
         for test_case_path in tests_cases:
             if test_case_path.endswith('metadata.json'):
                 continue
