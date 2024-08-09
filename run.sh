@@ -59,7 +59,7 @@ for run in $(seq 1 $RUNS); do
     if [ -z "$WARMUP_FILE" ]; then
       echo "Running script without warm up."
       if [ "$client" = "erigon" ]; then
-        for file in "$TEST_PATH"/Burnt/*.txt; do
+        for file in "$TEST_PATH"Burnt/*.txt; do
           echo "Running script with file: $file"
           if [ -z "$image" ]; then
             echo "Image input is empty, using default image."
@@ -80,7 +80,7 @@ for run in $(seq 1 $RUNS); do
     else
       echo "Using provided warm up file: $WARMUP_FILE"
       if [ "$client" = "erigon" ]; then
-        for file in "$TEST_PATH"/Burnt/*.txt; do
+        for file in "$TEST_PATH"Burnt/*.txt; do
           echo "Running script with file: $file"
           if [ -z "$image" ]; then
             echo "Image input is empty, using default image."
