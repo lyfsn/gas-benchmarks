@@ -68,19 +68,19 @@ for run in $(seq 1 $RUNS); do
             echo "Using provided image: $image for $client"
             python3 setup_node.py --client $client --image $image
           fi
-          python3 run_kute.py --output "$OUTPUT_DIR" --testsPath "$TEST_PATH" --jwtPath /tmp/jwtsecret --client $client --run $run --file "$file"
+          python3 run_kute.py --output "$OUTPUT_DIR" --testsPath $file --jwtPath /tmp/jwtsecret --client $client --run $run --file "$file"
           cd "scripts/$client"
           docker compose down
           sudo rm -rf execution-data
           cd ../..
         done
       else
-        python3 run_kute.py --output "$OUTPUT_DIR" --testsPath "$TEST_PATH" --jwtPath /tmp/jwtsecret --client $client --run $run
+        python3 run_kute.py --output "$OUTPUT_DIR" --testsPath $TEST_PATH --jwtPath /tmp/jwtsecret --client $client --run $run
       fi
     else
       echo "Using provided warm up file: $WARMUP_FILE"
       if [ "$client" = "erigon" ]; then
-        for file in "$TEST_PATH"Burnt/*.txt; do
+        for file in $fileBurnt/*.txt; do
           echo "Running script with file: $file"
           if [ -z "$image" ]; then
             echo "Image input is empty, using default image."
@@ -89,7 +89,7 @@ for run in $(seq 1 $RUNS); do
             echo "Using provided image: $image for $client"
             python3 setup_node.py --client $client --image $image
           fi
-          python3 run_kute.py --output "$OUTPUT_DIR" --testsPath "$TEST_PATH" --jwtPath /tmp/jwtsecret --warmupPath "$WARMUP_FILE" --client $client --run $run --file "$file"
+          python3 run_kute.py --output "$OUTPUT_DIR" --testsPath $file --jwtPath /tmp/jwtsecret --warmupPath "$WARMUP_FILE" --client $client --run $run --file "$file"
           cd "scripts/$client"
           docker compose down
           sudo rm -rf execution-data
