@@ -107,7 +107,7 @@ def main():
                     response)
         return
     else:
-        name = test_case_path.split('/')[-1].split('.')[0]
+        name = tests_paths.split('/')[-1].split('.')[0]
         response_file = os.path.join(output_folder, f'{client}_response_{run}_{name}_Burnt.txt')
         print(f"Running {client} for the {run} time with test case {tests_paths}")
         response = run_command(tests_paths, jwt_path, response_file, execution_url, kute_arguments)
