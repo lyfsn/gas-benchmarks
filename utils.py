@@ -77,6 +77,7 @@ def get_gas_table(client_results, client, test_cases, gas_set, method, metadata)
     gas_table_norm = {}
     results_per_test_case = {}
     for test_case, _ in test_cases.items():
+        print("---debug---", test_case)
         for gas in gas_set:
             if gas not in client_results[client][test_case]:
                 continue
