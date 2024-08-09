@@ -96,7 +96,7 @@ def main():
             response_file = os.path.join(output_folder, f'{client}_response_{run}_{name}.txt')
             print(f"Running {client} for the {run} time with test case {test_case_path}")
             response = run_command(test_case_path, jwt_path, response_file, execution_url, kute_arguments)
-            response = run_command(tests_paths, jwt_path, response_file, execution_url, kute_arguments)
+            response = run_command(test_case_path, jwt_path, response_file, execution_url, kute_arguments)
             save_to(output_folder, f'{client}_results_{run}_{name}.txt',
                     response)
         return
